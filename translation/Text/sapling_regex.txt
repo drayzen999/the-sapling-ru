@@ -1,0 +1,69 @@
+// The Sapling — русификатор. Шаблоны для фраз, которые игра склеивает из кусков.
+// r:  — обычная регулярка; sr: — группы дополнительно переводятся по словарю.
+// Окончания: 1/21/101 год, 2-4/22-24 года, 5-20/25-30/11-14 лет.
+
+// ----- годы -----
+r:"^((?:\d*[02-9])?1) years?$"=$1 год
+r:"^((?:\d*[02-9])?[234]) years?$"=$1 года
+r:"^(\d*(?:1\d|[05-9])) years?$"=$1 лет
+r:"^((?:\d*[02-9])?1) years ago$"=$1 год назад
+r:"^((?:\d*[02-9])?[234]) years ago$"=$1 года назад
+r:"^(\d*(?:1\d|[05-9])) years ago$"=$1 лет назад
+r:"^((?:\d*[02-9])?1) years played$"=сыгран $1 год
+r:"^((?:\d*[02-9])?[234]) years played$"=сыграно $1 года
+r:"^(\d*(?:1\d|[05-9])) years played$"=сыграно $1 лет
+r:"^<b>(\d+)</b> years back$"=на <b>$1</b> лет назад
+r:"^(\d+)/(\d+) years left$"=осталось лет: $1/$2
+r:"^it is the year (-?\d+)$"=сейчас $1 год
+r:"^year (-?\d+) - now$"=$1 г. — сейчас
+r:"^year (-?\d+) - year (-?\d+)$"=$1 — $2 гг.
+r:"^(\d+) millennium$"=$1 тыс. лет
+r:"^(\d+) millennia$"=$1 тыс. лет
+r:"^(\d+) days? old$"=$1 дн.
+r:"^(\d+) minutes$"=$1 мин
+
+// ----- списки видов / семейства -----
+r:"^(\d+|\?) alive$"=живых: $1
+r:"^(\d+) alive, (\d+) years old$"=живых: $1, лет: $2
+r:"^(\d+) years old$"=лет: $1
+r:"^(\d+) natural \(and (\d+) recently introduced\)$"=естественных: $1 (и ещё $2 недавно заселены)
+r:"^Number of living (.+)s$"=Число живых: $1
+r:"^Sex ([A-Z])$"=Пол $1
+r:"^below (-?\d+)°$"=ниже $1°
+r:"^above (-?\d+)°$"=выше $1°
+r:"^Infected by (.+)$"=Заражён: $1
+r:"^You are introducing species: (.+)$"=Вы заселяете вид: $1
+r:"^Select a host for parasite species: (.+)$"=Выберите хозяина для вида-паразита: $1
+r:"^([\d.,]+)/(\d+) GB RAM used$"=Использовано ОЗУ: $1/$2 ГБ
+
+// ----- главное меню -----
+r:"^(\d+) challenges completed$"=Пройдено испытаний: $1
+r:"^(\d+) hours and (\d+) minutes until the next challenge$"=До следующего испытания: $1 ч $2 мин
+
+// ----- уведомления -----
+r:"^The first (.+) was born\.$"=Появился первый представитель вида $1.
+r:"^There are (\d+) (.+)s alive right now!$"=Сейчас живо особей вида $2: $1!
+r:"^(.+?) went extinct because of the cold$"=$1 вымер из-за холода
+r:"^(.+?) went extinct because of the heat$"=$1 вымер из-за жары
+r:"^(.+?) went extinct because of a wildfire$"=$1 вымер из-за лесного пожара
+r:"^(.+?) went extinct because of unlucky mutations$"=$1 вымер из-за неудачных мутаций
+sr:"^(?<name>.+?) went extinct because (?<reason>(?!of ).+)$"=${name} вымер, потому что ${reason}
+r:"^Because of a dust cloud, only (\d+)% of sunlight reaches the soil\.$"=Из-за облака пыли до почвы доходит лишь $1% солнечного света.
+r:"^Only (\d+)% of sunlight currently reaches the soil\.$"=Сейчас до почвы доходит лишь $1% солнечного света.
+r:"^A meteorite will hit your planet in the year (-?\d+)\. The smoke will block a large part of the sunlight\.$"=В $1 году в вашу планету врежется метеорит. Дым закроет большую часть солнечного света.
+r:"^A meteorite will hit your world in the year (-?\d+)\. The smoke will block (\d+)% of the sunlight\.$"=В $1 году в ваш мир врежется метеорит. Дым закроет $2% солнечного света.
+r:"^The sea will freeze and form an ice bridge in the year (-?\d+)\.$"=В $1 году море замёрзнет и образует ледяной мост.
+sr:"^Milestone: (.+)$"=Этап: $1
+sr:"^Completed milestone: '(.+)'$"=Этап выполнен: «$1»
+r:"^Temperatures are rising\. Make sure to focus on skin and eggs to beat the heat!$"=Температура растёт. Чтобы пережить жару, сосредоточьтесь на коже и яйцах!
+r:"^Temperatures are rising\. You can check the current temperature under the terrain button!$"=Температура растёт. Текущую температуру можно посмотреть под кнопкой рельефа!
+r:"^Temperatures are rising\. Make sure to focus on skin and eggs to beat the heat!\s*You can check the current temperature under the terrain button!$"=Температура растёт. Чтобы пережить жару, сосредоточьтесь на коже и яйцах! Текущую температуру можно посмотреть под кнопкой рельефа!
+
+// ----- цели сценариев: «текущее/нужное + описание» -----
+sr:"^(?<n>\d+/\d+) +(?<goal>(?!years left).+)$"=${n} ${goal}
+
+// ----- инстинкты: «если <чувство> <цель>, <действие>» -----
+sr:"^if you see (?<what>.+?)\s*, (?<act>.+)$"=если видишь ${what} — ${act}
+sr:"^if you hear (?<what>.+?)\s*, (?<act>.+)$"=если слышишь ${what} — ${act}
+sr:"^if you feel (?<what>.+?)\s*, (?<act>.+)$"=если чувствуешь ${what} — ${act}
+sr:"^if you a hear (?<what>.+?)\s*, (?<act>.+)$"=если слышишь ${what} — ${act}
